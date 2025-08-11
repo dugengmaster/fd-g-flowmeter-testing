@@ -17,7 +17,6 @@ class MqttClient:
         self.client.on_connect = self._on_connect
         self.client.on_disconnect = self._on_disconnect
         self.client.on_publish = self._on_publish
-        self.client.on_log = self._on_log
 
         if MqttConfig.MQTT_USERNAME and MqttConfig.MQTT_PASSWORD:
             self.client.username_pw_set(MqttConfig.MQTT_USERNAME, MqttConfig.MQTT_PASSWORD)
@@ -39,9 +38,6 @@ class MqttClient:
 
     def _on_publish(self, client, userdata, mid):
         print(f"📤 Message {mid} published successfully")
-
-    def _on_log(self, client, userdata, level, buf):
-        pass
 
     def connect(self) -> bool:
         """連接到 MQTT Broker"""
@@ -67,13 +63,11 @@ class MqttClient:
             return False
 
     def disconnect(self):
-        """斷開 MQTT 連線"""
         if self.client:
             self.client.loop_stop()
             self.client.disconnect()
 
     def publish_data(self, data: Dict[Any, Any], topic: Optional[str] = None) -> bool:
-        """發送數據到 MQTT"""
         if not self.is_connected:
             print("⚠️ MQTT not connected, attempting to reconnect...")
             if not self.connect():
@@ -81,7 +75,6 @@ class MqttClient:
                 return False
 
         try:
-            # 使用預設 topic 或自訂 topic
             publish_topic = topic or MqttConfig.TOPIC
 
             # 轉換為 JSON
@@ -104,7 +97,6 @@ class MqttClient:
             return False
 
     def publish_json(self, json_string: str, topic: Optional[str] = None) -> bool:
-        """發送 JSON 字串到 MQTT"""
         if not self.is_connected:
             print("⚠️ MQTT not connected, attempting to reconnect...")
             if not self.connect():

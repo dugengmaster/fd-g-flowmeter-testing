@@ -28,7 +28,7 @@ if __name__ == "__main__":
             if success:
                 # 顯示 JSON 數據
                 json_data = compressor.get_json(indent=2)
-                print("📊 Air Compressor Data:")
+                print("Flow Meter Data:")
                 print(json_data)
                 
                 # 發送到 MQTT（如果連線正常）
