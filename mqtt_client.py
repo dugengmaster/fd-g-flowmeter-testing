@@ -122,5 +122,4 @@ class MqttClient:
             return False
 
     def is_alive(self) -> bool:
-        """檢查連線狀態"""
         return self.is_connected
