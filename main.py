@@ -20,7 +20,7 @@ if __name__ == "__main__":
 
     try:
         while True:
-            print(f"\n⏰ Reading sensor data...")
+            print("\n⏰ Reading sensor data...")
             
             # 讀取感測器數據
             success = compressor.read_sensor_data()

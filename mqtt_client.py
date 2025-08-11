@@ -32,7 +32,7 @@ class MqttClient:
     def _on_disconnect(self, client, userdata, rc):
         self.is_connected = False
         if rc != 0:
-            print(f"⚠️ Unexpected disconnection from MQTT Broker")
+            print("⚠️ Unexpected disconnection from MQTT Broker")
         else:
             print("📴 Disconnected from MQTT Broker")
 
