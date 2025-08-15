@@ -3,7 +3,7 @@ from config import AppConfig
 from flowmeter_data_controller import FlowMeterDataController
 from mqtt_client import MqttClient
 
-if __name__ == "__main__":
+def main():
     print(f"🚀 Starting Air Compressor MQTT data reader (every {AppConfig.WAIT_TIME} seconds)")
     print("Press Ctrl+C to stop")
 
@@ -58,3 +58,6 @@ if __name__ == "__main__":
         mqtt_client.disconnect()
         print("📴 MQTT disconnected")
         print("✋ Program terminated by user")
+
+if __name__ == "__main__":
+    main()

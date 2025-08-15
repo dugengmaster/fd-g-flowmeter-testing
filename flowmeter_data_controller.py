@@ -85,15 +85,13 @@ class FlowMeterDataController:
             self.clear_data()
             self.refresh_timestamp()
             
-            key = 0
+            
             # 循環讀取所有暫存器組
             for group in RegisterConfig.REGISTER_GROUPS:
+                key = group["start"]
                 success, key = self._read_register_group(group, key)
                 if not success:
                     return False
-                # 更新 key 為下一組的起始值
-                key = group["end"] + 1 if group["start"] != 0 else key
-
             return True
 
         except Exception as e:
